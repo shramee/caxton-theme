@@ -8,33 +8,33 @@
  *
  * @link https://developer.wordpress.org/themes/functionality/custom-headers/
  *
- * @package Caxton
+ * @package Caxton theme
  */
 
 /**
  * Set up the WordPress core custom header feature.
  *
- * @uses caxton_header_style()
+ * @uses cxth_header_style()
  */
-function caxton_custom_header_setup() {
-	add_theme_support( 'custom-header', apply_filters( 'caxton_custom_header_args', array(
+function cxth_custom_header_setup() {
+	add_theme_support( 'custom-header', apply_filters( 'cxth_custom_header_args', array(
 		'default-image'          => '',
 		'default-text-color'     => '000000',
 		'width'                  => 1000,
 		'height'                 => 250,
 		'flex-height'            => true,
-		'wp-head-callback'       => 'caxton_header_style',
+		'wp-head-callback'       => 'cxth_header_style',
 	) ) );
 }
-add_action( 'after_setup_theme', 'caxton_custom_header_setup' );
+add_action( 'after_setup_theme', 'cxth_custom_header_setup' );
 
-if ( ! function_exists( 'caxton_header_style' ) ) :
+if ( ! function_exists( 'cxth_header_style' ) ) :
 	/**
 	 * Styles the header image and text displayed on the blog.
 	 *
-	 * @see caxton_custom_header_setup().
+	 * @see cxth_custom_header_setup().
 	 */
-	function caxton_header_style() {
+	function cxth_header_style() {
 		$header_text_color = get_header_textcolor();
 
 		/*

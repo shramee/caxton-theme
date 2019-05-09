@@ -1,4 +1,4 @@
-Caxton Theme
+Caxton theme Theme
 ============
 
 

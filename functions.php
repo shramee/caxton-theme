@@ -1,13 +1,31 @@
 <?php
 /**
- * Caxton functions and definitions
+ * Caxton theme functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package Caxton
+ * @package Caxton theme
  */
 
-if ( ! function_exists( 'caxton_setup' ) ) :
+if ( ! class_exists( 'Caxton theme' ) ) {
+	function cxth_required_notice() {
+		echo
+			'<div class="notice is-dismissible error">
+				<p>' .
+			sprintf(
+				__( '%s requires that you have our free plugin %s installed and activated.', 'sfp-blocks' ),
+				'<b>WooBuilder Blocks</b>',
+				'<a href="' . admin_url( 'plugin-install.php?s=caxton&tab=search&type=term' ) . '">Caxton</a>'
+			) . '</p>' .
+			'<p><a style="background:#e25c4e;border-color:#d23c1e;text-shadow:none;box-shadow:0 1px 0 #883413;" href="' .
+			admin_url( 'plugin-install.php?s=caxton&tab=search&type=term' ) . '" class="button-primary button-pootle">' .
+			__( 'Install Caxton', 'sfp_blocks' ) . '</a></p>' .
+			'</div>';
+	}
+	add_action( 'admin_notices', 'cxth_required_notice' );
+}
+
+if ( ! function_exists( 'cxth_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
@@ -15,14 +33,14 @@ if ( ! function_exists( 'caxton_setup' ) ) :
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
 	 */
-	function caxton_setup() {
+	function cxth_setup() {
 		/*
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
-		 * If you're building a theme based on Caxton, use a find and replace
-		 * to change 'caxton' to the name of your theme in all the template files.
+		 * If you're building a theme based on Caxton theme, use a find and replace
+		 * to change 'cxth' to the name of your theme in all the template files.
 		 */
-		load_theme_textdomain( 'caxton', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'cxth', get_template_directory() . '/languages' );
 
 		// Add default posts and comments RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
@@ -44,7 +62,7 @@ if ( ! function_exists( 'caxton_setup' ) ) :
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'caxton' ),
+			'menu-1' => esc_html__( 'Primary', 'cxth' ),
 		) );
 
 		/*
@@ -60,7 +78,7 @@ if ( ! function_exists( 'caxton_setup' ) ) :
 		) );
 
 		// Set up the WordPress core custom background feature.
-		add_theme_support( 'custom-background', apply_filters( 'caxton_custom_background_args', array(
+		add_theme_support( 'custom-background', apply_filters( 'cxth_custom_background_args', array(
 			'default-color' => 'ffffff',
 			'default-image' => '',
 		) ) );
@@ -81,7 +99,7 @@ if ( ! function_exists( 'caxton_setup' ) ) :
 		) );
 	}
 endif;
-add_action( 'after_setup_theme', 'caxton_setup' );
+add_action( 'after_setup_theme', 'cxth_setup' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -90,47 +108,47 @@ add_action( 'after_setup_theme', 'caxton_setup' );
  *
  * @global int $content_width
  */
-function caxton_content_width() {
+function cxth_content_width() {
 	// This variable is intended to be overruled from themes.
 	// Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
 	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-	$GLOBALS['content_width'] = apply_filters( 'caxton_content_width', 640 );
+	$GLOBALS['content_width'] = apply_filters( 'cxth_content_width', 640 );
 }
-add_action( 'after_setup_theme', 'caxton_content_width', 0 );
+add_action( 'after_setup_theme', 'cxth_content_width', 0 );
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function caxton_widgets_init() {
+function cxth_widgets_init() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'caxton' ),
+		'name'          => esc_html__( 'Sidebar', 'cxth' ),
 		'id'            => 'sidebar-1',
-		'description'   => esc_html__( 'Add widgets here.', 'caxton' ),
+		'description'   => esc_html__( 'Add widgets here.', 'cxth' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
 }
-add_action( 'widgets_init', 'caxton_widgets_init' );
+add_action( 'widgets_init', 'cxth_widgets_init' );
 
 /**
  * Enqueue scripts and styles.
  */
-function caxton_scripts() {
-	wp_enqueue_style( 'caxton-style', get_stylesheet_uri() );
+function cxth_scripts() {
+	wp_enqueue_style( 'cxth-style', get_stylesheet_uri() );
 
-	wp_enqueue_script( 'caxton-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	wp_enqueue_script( 'cxth-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
-	wp_enqueue_script( 'caxton-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+	wp_enqueue_script( 'cxth-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'caxton_scripts' );
+add_action( 'wp_enqueue_scripts', 'cxth_scripts' );
 
 /**
  * Implement the Custom Header feature.

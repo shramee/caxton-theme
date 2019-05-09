@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Caxton
+ * @package Caxton theme
  */
 
 ?>
@@ -22,21 +22,21 @@
 			?>
 			<div class="entry-meta">
 				<?php
-				caxton_posted_on();
-				caxton_posted_by();
+				cxth_posted_on();
+				cxth_posted_by();
 				?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php caxton_post_thumbnail(); ?>
+	<?php cxth_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
 		the_content( sprintf(
 			wp_kses(
 				/* translators: %s: Name of current post. Only visible to screen readers */
-				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'caxton' ),
+				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'cxth' ),
 				array(
 					'span' => array(
 						'class' => array(),
@@ -47,13 +47,13 @@
 		) );
 
 		wp_link_pages( array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'caxton' ),
+			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'cxth' ),
 			'after'  => '</div>',
 		) );
 		?>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php caxton_entry_footer(); ?>
+		<?php cxth_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

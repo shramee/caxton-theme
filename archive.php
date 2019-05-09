@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Caxton
+ * @package Caxton theme
  */
 
 get_header();
