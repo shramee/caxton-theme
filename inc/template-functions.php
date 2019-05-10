@@ -35,3 +35,7 @@ function cxth_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'cxth_pingback_header' );
+
+function cxth_temaplate( $slug, $name ) {
+	get_template_part( '', '' );
+}

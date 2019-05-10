@@ -7,14 +7,14 @@
  * @package Caxton theme
  */
 
-if ( ! class_exists( 'Caxton theme' ) ) {
+if ( ! class_exists( 'Caxton' ) ) {
 	function cxth_required_notice() {
 		echo
 			'<div class="notice is-dismissible error">
 				<p>' .
 			sprintf(
-				__( '%s requires that you have our free plugin %s installed and activated.', 'sfp-blocks' ),
-				'<b>WooBuilder Blocks</b>',
+				__( '%s requires that you have our free %s plugin installed and activated.', 'sfp-blocks' ),
+				'<b>Caxton theme</b>',
 				'<a href="' . admin_url( 'plugin-install.php?s=caxton&tab=search&type=term' ) . '">Caxton</a>'
 			) . '</p>' .
 			'<p><a style="background:#e25c4e;border-color:#d23c1e;text-shadow:none;box-shadow:0 1px 0 #883413;" href="' .
