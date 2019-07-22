@@ -22,6 +22,7 @@ if ( ! class_exists( 'Caxton' ) ) {
 			__( 'Install Caxton', 'sfp_blocks' ) . '</a></p>' .
 			'</div>';
 	}
+
 	add_action( 'admin_notices', 'cxth_required_notice' );
 }
 
@@ -114,6 +115,7 @@ function cxth_content_width() {
 	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 	$GLOBALS['content_width'] = apply_filters( 'cxth_content_width', 640 );
 }
+
 add_action( 'after_setup_theme', 'cxth_content_width', 0 );
 
 /**
@@ -132,6 +134,7 @@ function cxth_widgets_init() {
 		'after_title'   => '</h2>',
 	) );
 }
+
 add_action( 'widgets_init', 'cxth_widgets_init' );
 
 /**
@@ -148,6 +151,7 @@ function cxth_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
+
 add_action( 'wp_enqueue_scripts', 'cxth_scripts' );
 
 /**
@@ -177,3 +181,19 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+function cxth_get_content_post( $name, $before, $after ) {
+	$prefix = apply_filters( 'cxth_content_post_name_prefix', 'cxth' );
+
+	$content_post = new WP_Query( [
+		'name' => "$prefix-$name",
+		'post_type' => 'page',
+	] );
+
+	if ( $content_post->have_posts() ) {
+		echo $before;
+		$content_post->the_post();
+		the_content();
+		wp_reset_postdata();
+		echo $after;
+	}
+}

@@ -18,4 +18,5 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 
 Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
-*/img{max-width:100%;height:auto}
+*/.col-full{max-width:1240px;margin:auto;padding:0 10px}.col-full .col-full{padding:0}a{text-decoration:none}img{max-width:100%;height:auto}
+/*# sourceMappingURL=style.css.map */

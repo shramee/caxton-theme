@@ -24,8 +24,11 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'cxth' ); ?></a>
 
-	<header id="masthead" class="site-header">
-        <?php ?>
-	</header><!-- #masthead -->
+
+	<?php
+	cxth_get_content_post( 'header', '<header id="masthead" class="site-header">', '</header><!-- #masthead -->' );
+	?>
+
 
 	<div id="content" class="site-content">
+		<div class="col-full">
