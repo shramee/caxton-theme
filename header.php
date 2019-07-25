@@ -26,7 +26,7 @@
 
 
 	<?php
-	cxth_get_content_post( 'header', '<header id="masthead" class="site-header">', '</header><!-- #masthead -->' );
+	cxth_get_content_post( 'header', '<header id="masthead" class="site-header"><div class="col-full">', '</div></header><!-- #masthead -->' );
 	?>
 
 
