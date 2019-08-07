@@ -112,7 +112,7 @@ class CxTh_Customizer_Control extends WP_Customize_Control {
 		if ( 'heading' == $this->type ) {
 			echo '<br><hr>';
 		}
-Q
+
 		?><span class="customize-control-title"><?php echo wp_kses_post( $this->label ); ?></span><?php
 
 		if ( !empty( $this->description ) ) {

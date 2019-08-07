@@ -284,7 +284,16 @@ if ( ! class_exists( 'CxTh_Customizer_Manager' ) ) {
 		 */
 		protected function add_controls( $fields ) {
 			foreach ( $fields as $option ) {
+				$settings_type = isset( $option['settings_type'] ) ? $option['settings_type'] : $this->settings_type;
 				$settings_class = $this->settings_class;
+
+				$settings_args = isset( $option['settings_args'] ) ? $option['settings_args'] : [];
+
+				$setting_args = wp_parse_args( $settings_args, [
+					'default'  => $option['default'],
+					'type'     => $settings_type,
+					'autoload' => 'no'
+				] );
 				/**
 				 * Filters settings arguments.
 				 * The dynamic part refers to the ID of options group
@@ -292,11 +301,7 @@ if ( ! class_exists( 'CxTh_Customizer_Manager' ) ) {
 				 * @param array $setting_args Arguments
 				 * @param array $option Option data
 				 */
-				$setting_args = apply_filters( 'cxth_customizer_' . $this->id . '_setting_args', array(
-					'default'  => $option['default'],
-					'type'     => $this->settings_type,
-					'autoload' => 'no'
-				), $option );
+				$setting_args = apply_filters( 'cxth_customizer_' . $this->id . '_setting_args', $setting_args, $option );
 				//Render Simple controls ( Containing single field )
 				call_user_func( $this->add_control_callback, $option, $setting_args, $settings_class, $this );
 			}
@@ -306,6 +311,8 @@ if ( ! class_exists( 'CxTh_Customizer_Manager' ) ) {
 		 * Adds simple control and its setting to WP_Customize_Manager
 		 *
 		 * @param array $option Field data
+		 * @param array $setting_args Settings args
+		 * @param string $settings_class Setting class to instantiate
 		 *
 		 * @since 0.7
 		 */
