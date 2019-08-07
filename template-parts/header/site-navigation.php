@@ -7,17 +7,17 @@
  * @since 1.0.0
  */
 
-$main_menu = cxth_minify( wp_nav_menu( [
+$main_menu = wp_nav_menu( [
 	'theme_location' => 'main-menu',
 	'menu_class'     => 'main-navigation menu dn db-l',
 	'echo'           => false,
-] ) );
+] );
 
-$mobile_menu = cxth_minify( wp_nav_menu( [
+$mobile_menu = wp_nav_menu( [
 	'theme_location' => has_nav_menu( 'mobile-menu' ) ? 'mobile-menu' : 'main-menu',
 	'menu_class'     => 'mobile-navigation menu absolute dn-l right-0 w-100',
 	'echo'           => false,
-] ) );
+] );
 
 ?>
 <nav class="site-navigation">

@@ -1,107 +1,170 @@
 <?php
 /**
- *
+ * Contains fields info
  */
-$fields = array(
-	'General' => array(
-	),
-	'Header'  => array(
 
-		'header-bg-color' => array(
+$background = apply_filters( 'cxth_default_background', '#f5f5f5' );
+$text_line_height = apply_filters( 'cxth_text_line_height', 1.6 );
+$text_size = apply_filters( 'cxth_default_text_size', 16 );
+$text_font = apply_filters( 'cxth_default_text_color', 'Helvetica,sans-serif' );
+$text_color = apply_filters( 'cxth_default_text_font', '#454545' );
+$heading_color = apply_filters( 'cxth_default_heading_color', '#5a5a5a' );
+
+$header_color = apply_filters( 'cxth_default_accent_color', '#ffffff' );
+$footer_color = apply_filters( 'cxth_default_accent_color', $header_color );
+
+$accent_color = apply_filters( 'cxth_default_accent_color', '#00a0e7' );
+$accent_color_hover = apply_filters( 'cxth_default_accent_color_hover', '#33b9ff' );
+
+// @TODO Get working Heading icons
+
+$fields = [
+	'General' => [
+		'background-color' => [
+			'label'    => 'Background color',
+			'type'     => 'color',
+			'user'     => 'creative',
+			'output'   => 'body{background:%s;}',
+			'default'  => $background,
+			'priority' => '5',
+		],
+		'text-font'        => [
+			'label'       => 'Body text',
+			'type'        => 'typography',
+			'description' => 'Specify default font styling of your site',
+			'user'        => 'business',
+			'output'      => 'body{%s}',
+			'default'     => "||||$text_size|$text_font|$text_color|0",
+			'priority'    => '10',
+		],
+		'heading-font'     => [
+			'label'       => 'Heading/Title Font',
+			'type'        => 'typography',
+			'description' => 'Specify font styling of all headings on your site',
+			'user'        => 'business',
+			'output'      => 'h1,h2,h3,h4,h5,h6,.entry-title{%s}',
+			'default'     => '||||' . 2.5 * $text_size . "|$text_font|$heading_color|0",
+			'priority'    => '15',
+		],
+		'heading-size'     => [
+			'label'       => 'Heading Size',
+			'type'        => 'slider',
+			'description' => 'Font size for all heading (affects proportionally heading h2 to h6)',
+			'user'        => 'business',
+			'output'      => 'h2{font-size:%spx}h3{font-size:calc(%spx*.8)}h4{font-size:calc(%spx*.65)}h5{font-size:calc(%spx*.5)}h6{font-size:calc(%spx*.4)}',
+			'default'     => 2 * $text_size,
+			'priority'    => '20',
+		],
+		'link-color'       => [
+			'label'       => 'Link color',
+			'type'        => 'color',
+			'description' => 'Set Active link color',
+			'user'        => 'creative',
+			'output'      => 'a{color:%s;}',
+			'default'  => $accent_color,
+			'priority'    => '25',
+		],
+		'link-hover-color'       => [
+			'label'       => 'Link hover color',
+			'type'        => 'color',
+			'description' => 'Set Active link color',
+			'user'        => 'creative',
+			'output'      => 'a:hover{color:%s;}',
+			'default'  => $accent_color_hover,
+			'priority'    => '25',
+		],
+	],
+	'Header'  => [
+
+		'header-bg-color'      => [
 			'label'       => 'Background color',
 			'type'        => 'color',
 			'description' => 'Header background color',
-			'section'     => array( '0' => 'header_image', '1' => 'Header layout' ),
+			'section'     => [ '0' => 'header_image', '1' => 'Header layout' ],
 			'user'        => 'business',
-			'output'      => '.site-header{backround-color:%s;}',
-		),
-		'header-border'   => array(
+			'output'      => '.site-header{background-color:%s;}',
+			'default'     => $header_color,
+		],
+		'header-border'        => [
 			'label'       => 'Border',
 			'type'        => 'all-border',
 			'description' => 'Set border of header',
 			'section'     => 'existing_header_image',
 			'user'        => 'creative',
 			'output'      => '.site-header{border:%s;}',
-		),
+		],
 
-		'heading-social-icons' => array(
+		// region Heading icons
+		'heading-social-icons' => [
 			'label'       => 'Navigation Social Icons',
 			'description' => 'Display appropriate icons in menu linking to the URL specified.',
 			'type'        => 'heading',
 			'section'     => 'Social icons',
 			'user'        => 'business',
 			'priority'    => '40',
-		),
-		'social[facebook]'     => array(
+		],
+		'social[facebook]'     => [
 			'label'    => 'Facebook Page URL',
 			'type'     => 'text',
 			'section'  => 'Social icons',
 			'user'     => 'business',
 			'priority' => '45',
-		),
-		'social[twitter]'      => array(
+		],
+		'social[twitter]'      => [
 			'label'    => 'Twitter Page URL',
 			'type'     => 'text',
 			'section'  => 'Social icons',
 			'user'     => 'business',
 			'priority' => '50',
-		),
-		'social[google]'       => array(
+		],
+		'social[google]'       => [
 			'label'    => 'Google+ Page URL',
 			'type'     => 'text',
 			'section'  => 'Social icons',
 			'user'     => 'business',
 			'priority' => '55',
-		),
-		'social[youtube]'      => array(
+		],
+		'social[youtube]'      => [
 			'label'    => 'Youtube Channel URL',
 			'type'     => 'text',
 			'section'  => 'Social icons',
 			'user'     => 'business',
 			'priority' => '60',
-		),
-		'social[github]'       => array(
+		],
+		'social[github]'       => [
 			'label'    => 'Github Page URL',
 			'type'     => 'text',
 			'section'  => 'Social icons',
 			'user'     => 'business',
 			'priority' => '65',
-		),
-		'social[linkedin]'     => array(
+		],
+		'social[linkedin]'     => [
 			'label'    => 'LinkedIn Profile URL',
 			'type'     => 'text',
 			'section'  => 'Social icons',
 			'user'     => 'business',
 			'priority' => '70',
-		),
-		'social[instagram]'    => array(
+		],
+		'social[instagram]'    => [
 			'label'    => 'InstaGram Page URL',
 			'type'     => 'text',
 			'section'  => 'Social icons',
 			'user'     => 'business',
 			'priority' => '65',
-		),
-		'social[vkontacte]'    => array(
+		],
+		'social[vkontacte]'    => [
 			'label'    => 'V Kontacte Page URL',
 			'type'     => 'text',
 			'section'  => 'Social icons',
 			'user'     => 'business',
 			'priority' => '70',
-		),
-	),
+		],
+		// endregion Heading icons
+	],
 
-	'Primary Menu' => array(
-		'primary-menu-item-gap'              => array(
-			'label'       => 'Gap Between Menu Items',
-			'type'        => 'slider',
-			'description' => 'Distance between adjacent menu items.',
-			'section'     => 'Menu Items',
-			'user'        => 'creative',
-			'output'      => '.main-navigation > ul > li:not(:first-child){margin-left:%spx;}',
-			'priority'    => '25',
-		),
+	'Primary Menu' => [
 
-		'primary-menu-it-bg-color'        => array(
+		'prinav-it-bg-color'      => [
 			'label'       => 'Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -109,8 +172,8 @@ $fields = array(
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li > a{background-color:%s;}',
 			'priority'    => '5',
-		),
-		'primary-menu-it-text-color'      => array(
+		],
+		'prinav-it-text-color'    => [
 			'label'       => 'Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -118,9 +181,29 @@ $fields = array(
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li > a{color:%s;}',
 			'priority'    => '10',
-		),
+			'default'     => $text_color,
+		],
+		'prinav-it-gap'         => [
+			'label'       => 'Gap Between Menu Items',
+			'type'        => 'slider',
+			'description' => 'Distance between adjacent menu items.',
+			'section'     => 'Menu Items',
+			'user'        => 'creative',
+			'output'      => '.main-navigation > ul > li:not(:first-child){margin-left:%spx;}',
+			'priority'    => '25',
+			'default'     => '2',
+		],
+		'prinav-it-padding'          => [
+			'label'       => 'Padding',
+			'type'        => 'spacing',
+			'section'     => 'Menu Items',
+			'user'        => 'designer',
+			'output'      => '.main-navigation li a{padding:%s;}',
+			'priority'    => '20',
+			'default'     => '7px 10px',
+		],
 
-		'primary-menu-it-ho-bg-color'        => array(
+		'prinav-it-ho-bg-color'   => [
 			'label'       => 'Hover Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -128,8 +211,8 @@ $fields = array(
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li > a:hover{background-color:%s;}',
 			'priority'    => '5',
-		),
-		'primary-menu-it-ho-text-color'      => array(
+		],
+		'prinav-it-ho-text-color' => [
 			'label'       => 'Hover Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -137,36 +220,37 @@ $fields = array(
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li > a:hover{color:%s;}',
 			'priority'    => '10',
-		),
+			'default'     => $heading_color,
+		],
 
-		'primary-menu-it-ac-bg-color'        => array(
+		'prinav-it-ac-bg-color'   => [
 			'label'       => 'Active menu item Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
-			'section'     => 'Menu Active Item',
+			'section'     => 'Menu Item Active',
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li.current-menu-item > a,.main-navigation > ul > li.current-menu-ancestor > a{background-color:%s;}',
 			'priority'    => '5',
-		),
-		'primary-menu-it-ac-text-color'      => array(
+		],
+		'prinav-it-ac-text-color' => [
 			'label'       => 'Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
-			'section'     => 'Menu Active Item',
+			'section'     => 'Menu Item Active',
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li.current-menu-item > a,.main-navigation > ul > li.current-menu-ancestor > a{color:%s;}',
 			'priority'    => '10',
-		),
+		],
 
-		'sub-menu'                           => array(
+		'sub-menu'      => [
 			'label'    => 'Sub Menu',
 			'type'     => 'all-custo',
 			'section'  => 'Submenu',
 			'user'     => 'business',
 			'output'   => '.main-navigation li ul{%s}',
 			'priority' => '5',
-		),
-		'su-it-padding'                      => array(
+		],
+		'su-it-padding' => [
 			'label'       => 'Padding',
 			'type'        => 'spacing',
 			'description' => 'Padding',
@@ -174,9 +258,9 @@ $fields = array(
 			'user'        => 'designer',
 			'output'      => '.main-navigation li ul a{padding:%s;}',
 			'priority'    => '15',
-		),
+		],
 
-		'primary-menu-sub-it-bg-color'        => array(
+		'prinav-sub-it-bg-color'   => [
 			'label'       => 'Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -184,8 +268,8 @@ $fields = array(
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li ul a{background-color:%s;}',
 			'priority'    => '5',
-		),
-		'primary-menu-sub-it-text-color'      => array(
+		],
+		'prinav-sub-it-text-color' => [
 			'label'       => 'Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -193,9 +277,9 @@ $fields = array(
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li ul a{color:%s;}',
 			'priority'    => '10',
-		),
+		],
 
-		'primary-menu-sub-it-ho-bg-color'        => array(
+		'prinav-sub-it-ho-bg-color'   => [
 			'label'       => 'Hover Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -203,8 +287,8 @@ $fields = array(
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li ul a:hover{background-color:%s;}',
 			'priority'    => '5',
-		),
-		'primary-menu-sub-it-ho-text-color'      => array(
+		],
+		'prinav-sub-it-ho-text-color' => [
 			'label'       => 'Hover Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -212,9 +296,9 @@ $fields = array(
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li > a:hover{color:%s;}',
 			'priority'    => '10',
-		),
+		],
 
-		'primary-menu-sub-it-ac-bg-color'        => array(
+		'prinav-sub-it-ac-bg-color'   => [
 			'label'       => 'Active menu item Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -222,8 +306,8 @@ $fields = array(
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li ul .current-menu-item > a{background-color:%s;}',
 			'priority'    => '5',
-		),
-		'primary-menu-sub-it-ac-text-color'      => array(
+		],
+		'prinav-sub-it-ac-text-color' => [
 			'label'       => 'Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -231,114 +315,27 @@ $fields = array(
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li ul .current-menu-item > a{color:%s;}',
 			'priority'    => '10',
-		),
+		],
 
-	),
-	'Content'      => array(
-		'text-font'       => array(
-			'label'       => 'Body text',
-			'type'        => 'typography',
-			'description' => 'Specify default font styling of your site',
-			'user'        => 'business',
-			'output'      => 'body{%s}',
-			'priority'    => '65',
-		),
-		'heading-font'            => array(
-			'label'       => 'Heading Font',
-			'type'        => 'typography',
-			'description' => 'Specify font styling of all h1s on your site',
-			'user'        => 'business',
-			'output'      => 'h1,h2,h3,h4,h5,h6{%s}',
-			'priority'    => '5',
-		),
-		'active-link-color'  => array(
-			'label'       => 'Active Link color',
-			'type'        => 'color',
-			'description' => 'Set Active link color',
-			'user'        => 'creative',
-			'output'      => 'a{color:%s;}',
-			'priority'    => '70',
-		),
-		'visited-link-color' => array(
-			'label'       => 'Visited Link color',
-			'type'        => 'color',
-			'description' => 'Set visited link color',
-			'user'        => 'creative',
-			'output'      => 'a:visited{color:%s;}',
-			'priority'    => '75',
-		),
-	),
-	'Footer'       => array(
-		'bg-color'            => array(
+	],
+	'Footer'       => [
+		'footer-bg-color' => [
 			'label'    => 'BG color',
 			'type'     => 'color',
 			'user'     => 'business',
-			'output'   => 'footer{background-color:%s;}',
+			'output'   => '.site-footer{background-color:%s;}',
 			'priority' => '5',
-		),
-		'bottom-bar-bg-color' => array(
-			'label'    => 'Bottom Bar BG color',
-			'type'     => 'color',
-			'user'     => 'business',
-			'output'   => 'bot-bar{background-color:%s;}',
-			'priority' => '10',
-		),
-		'bottom-bar-shadow'   => array(
-			'label'       => 'Bottom Bar shadow',
-			'type'        => 'shadow',
-			'description' => 'Set shadow of the bottom bar',
-			'output'      => 'bot-bar{%s}',
-			'priority'    => '15',
-		),
-		'widgets-bg-color'    => array(
-			'label'       => 'Widgets BG color',
-			'type'        => 'color',
-			'description' => 'Set Widgets Background Color',
-			'user'        => 'creative',
-			'output'      => 'wid-area{background-color:%s;}',
-			'priority'    => '20',
-		),
-		'custom-text'         => array(
+			'default'  => $footer_color,
+		],
+		'custom-text'     => [
 			'label'       => 'Custom Text',
 			'type'        => 'text',
 			'description' => 'Put any custom text like Copyright info or any other Website Information',
 			'user'        => 'business',
 			'priority'    => '25',
-		),
-		'widgets-layout'      => array(
-			'label'       => 'Widgets Layout',
-			'type'        => 'radio',
-			'description' => 'Select the kind of layout for for widgets you want',
-			'user'        => 'business',
-			'choices'     => array(
-				'1'           => '1',
-				'2'           => '2',
-				'3'           => '3',
-				'4'           => '4',
-				'3_4-1_4'     => '3/4 + 1/4',
-				'1_4-3_4'     => '1/4 + 3/4',
-				'1_2-1_4-1_4' => '1/2 + 1/4 + 1/4',
-				'1_4-1_2-1_4' => '1/4 + 1/2 + 1/4',
-				'1_4-1_4-1_2' => '1/4 + 1/4 + 1/2'
-			),
-			'priority'    => '30',
-		),
-		'widgets-padding'     => array(
-			'label'       => 'Widgets Padding',
-			'type'        => 'spacing',
-			'description' => 'Distance from widget content to invisible border',
-			'user'        => 'designer',
-			'choices'     => array(
-				'top'    => 'Top',
-				'bottom' => 'Bottom',
-				'left'   => 'Left',
-				'right'  => 'Right'
-			),
-			'output'      => 'widget{padding:%spx;}',
-			'priority'    => '35',
-		),
-	),
-);
+		],
+	],
+];
 
 $panels = apply_filters( 'cxth_design_fields', $fields );
 

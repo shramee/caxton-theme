@@ -38,8 +38,10 @@ class Caxton_Theme {
 	 */
 	public function wp() {
 		$this->settings = get_option( 'cxth_customize_settings', [] );
-		if ( is_customize_preview() ) {
+		if ( is_customize_preview() || isset( $_GET['caxton-theme-debug'] ) ) {
 			$this->settings = wp_parse_args( CxTh_Design::live_settings(), $this->settings );
+		} else if ( empty( $this->settings['rev'] ) ) {
+			$this->save_settings();
 		}
 
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
@@ -94,12 +96,6 @@ class Caxton_Theme {
 			'gallery',
 			'caption',
 		) );
-
-		// Set up the WordPress core custom background feature.
-		add_theme_support( 'custom-background', apply_filters( 'cxth_custom_background_args', array(
-			'default-color' => 'ffffff',
-			'default-image' => '',
-		) ) );
 
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
@@ -186,7 +182,7 @@ class Caxton_Theme {
 
 		$settings = CxTh_Design::live_settings();
 
-		$customizer_file = fopen( trailingslashit( get_stylesheet_directory() ) . "customizer.css", "w" );
+		$customizer_file = fopen( trailingslashit( get_stylesheet_directory() ) . 'customizer.css', "w" );
 
 		if ( fwrite( $customizer_file, $settings['css'] ) ) {
 			unset( $settings['css'] ); // Unset css property if written to file.
