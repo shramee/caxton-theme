@@ -81,7 +81,7 @@ function cxth_get_tpl( $name, $before, $after ) {
 
 	echo $before;
 
-	if ( 0&& $content_post ) {
+	if ( $content_post ) {
 		echo apply_filters( 'the_content', $content_post->post_content );
 	} else {
 		get_template_part( "template-parts/$name" );
