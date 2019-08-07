@@ -40,6 +40,8 @@ class Caxton_Theme {
 		$this->settings = get_option( 'cxth_customize_settings', [] );
 		if ( is_customize_preview() || isset( $_GET['caxton-theme-debug'] ) ) {
 			$this->settings = wp_parse_args( CxTh_Design::live_settings(), $this->settings );
+
+			$this->settings['rev'] = '9.9.9';
 		} else if ( empty( $this->settings['rev'] ) ) {
 			$this->save_settings();
 		}
