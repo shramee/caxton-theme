@@ -20,22 +20,6 @@ Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
 
-.col-full {
-  max-width: 1240px;
-  margin: auto;
-  padding: 0 10px;
-  .col-full {
-    padding: 0;
-  }
-}
+@import 'scss/general';
 
-a {
-  text-decoration: none;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-@import 'scss/nav';
+@import 'scss/layout/layout';

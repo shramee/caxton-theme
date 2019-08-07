@@ -1,0 +1,41 @@
+.site-branding + .site-navigation {
+	margin-left: auto;
+	padding-left: 2em;
+}
+
+.menu {
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		position: relative;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	a {
+		display: block;
+	}
+}
+
+.mobile-navigation ul li,
+.mobile-navigation ul.children li {
+	width: 100%;
+}
+
+.main-navigation ul li {
+	position: relative;
+	display: block;
+
+	ul {
+		display: none;
+		min-width: 160px;
+		position: absolute;
+		top: 100%;
+		right: 0;
+	}
+
+	&:hover ul,
+	a:focus + ul {
+		display: block;
+	}
+}

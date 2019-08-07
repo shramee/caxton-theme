@@ -1,0 +1,39 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	line-height: 1.6;
+}
+
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal;
+}
+
+.col-full {
+	max-width: 1240px;
+	margin: auto;
+	padding: 0 10px;
+	.col-full {
+		padding: 0;
+	}
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1.2;
+	a, a:hover {
+		color: inherit;
+	}
+}
