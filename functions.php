@@ -71,20 +71,18 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
-function cxth_get_content_post( $name, $before, $after ) {
+function cxth_get_tpl( $name, $before, $after ) {
 	$prefix = apply_filters( 'cxth_content_post_name_prefix', 'cxth' );
 
-	$content_post = new WP_Query( [
+	$content_post = get_post( [
 		'name' => "$prefix-$name",
-		'post_type' => 'page',
+		'post_type' => 'any',
 	] );
 
 	echo $before;
 
-	if ( 0&& $content_post->have_posts() ) {
-		$content_post->the_post();
-		the_content();
-		wp_reset_postdata();
+	if ( 0&& $content_post ) {
+		echo apply_filters( 'the_content', $content_post->post_content );
 	} else {
 		get_template_part( "template-parts/$name" );
 	}

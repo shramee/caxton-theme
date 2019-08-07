@@ -8,12 +8,11 @@
 	display: none;
 	height: 0;
 	overflow: auto;
-	transition: height .5s .5s;
+	transition: height .5s .35s;
 }
 
 .cxth-google-fonts-wrap:hover .cxth-google-fonts {
 	height: 280px;
-	transition: height .5s;
 }
 
 .cxth-google-fonts [class^='cxth-gf'] {

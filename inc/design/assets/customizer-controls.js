@@ -55,7 +55,8 @@
 			var control = this,
 				picker = this.container.find('.color-picker-hex');
 
-			picker.val( control.setting() ).cxthColorPicker({
+//			picker.val( control.setting() );
+			picker.cxthColorPicker({
 				change: function() {
 					control.setting.set( picker.cxthColorPicker('color') );
 				},
@@ -76,7 +77,7 @@
 	/* CSS complex controls */
 	api.cxthSaveVals = function ( e ) {
 		var $p = e.data.p,
-			save_vals = $p.find( 'input, select, textarea' ).not( '.val-store, [type="button"]' ).map(
+			save_vals = $p.find( 'input, select, textarea' ).not( '.cxth-range-support, .val-store, [type="button"]' ).map(
 				function () {
 					var $t = $( this ),
 						chkbx = $t.is(':checkbox');
@@ -99,7 +100,6 @@
 			var $p = this.container;
 			$p.find( '.cxth-color' ).cxthColorPicker( {
 				change : function ( e, ui ) {
-					//$( this ).val( ui.color.toString() );
 					setTimeout( function () {
 						api.cxthSaveVals( { data : { p : $p } } );
 					}, 250 );
@@ -112,6 +112,11 @@
 				}
 			} );
 			$p.find( '.cxth-google-fonts' ).cxthGoogleFonts();
+
+			$p.find( '.cxth-range-support, input[type="range"]' ).change( function() {
+				$( this ).siblings( '.cxth-range-support, input[type="range"]' ).val( this.value );
+			} );
+
 			var $inputs = $p.find( 'input, select, textarea' ).not( '.val-store, [type="button"], .wp-color-picker' );
 			$inputs.change( { p : $p }, api.cxthSaveVals );
 		}

@@ -75,6 +75,9 @@ class CxTh_Design_Fields_Css {
 			}
 		} else {
 			$method = cxth_make_id( $f['type'], '_' ) . '_field_css';
+			if ( 1 < substr_count( $format, '%s' ) ) {
+				$format = str_replace( '%s', '%1$s', $format );
+			}
 			if ( method_exists( $this, $method ) ) {
 				$style = $this->$method( explode( '|', $setting ) ); // Get style from callback
 				if ( $style ) {

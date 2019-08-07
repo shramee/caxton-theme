@@ -112,7 +112,7 @@ class CxTh_Customizer_Control extends WP_Customize_Control {
 		if ( 'heading' == $this->type ) {
 			echo '<br><hr>';
 		}
-
+Q
 		?><span class="customize-control-title"><?php echo wp_kses_post( $this->label ); ?></span><?php
 
 		if ( !empty( $this->description ) ) {
@@ -137,7 +137,7 @@ class CxTh_Customizer_Control extends WP_Customize_Control {
 				$this->render_select( 'multiple="multiple"' );
 			} else if ( 'alpha-color' == $this->type ) {
 				?>
-				<input class='color-picker-hex' data-alpha='true' type='text' value=''<?php echo esc_attr( $this->value() ); ?>' <?php $this->link(); ?> />
+				<input class='color-picker-hex' type='text' value=''<?php echo esc_attr( $this->value() ); ?>' <?php $this->link(); ?> />
 				<?php
 			} else{
 				$this->render_multi_inputs();

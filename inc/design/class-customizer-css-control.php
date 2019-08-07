@@ -82,17 +82,17 @@ class CxTh_Customizer_CSS_Control extends WP_Customize_Control {
 	 */
 	protected function render_slider_content() {
 		$this->input_attrs = wp_parse_args( $this->input_attrs, array(
-			'step' => 1,
-			'min' => 0,
-			'max' => 160,
+			// 'step' => 1,
+			// 'min' => 0,
+			// 'max' => 100,
 		) );
 
 		$this->output_main_control(
 			'range',
 			cxth_stringify_prop_val( $this->input_attrs ) .
-			' class="cxth-width-75 cxth-slider"'
+			' class="cxth-width-80 cxth-slider"'
 		);
-		$number_attr = "class='cxth-width-25 alignright cxth-slider-val'";
+		$number_attr = "class='cxth-width-20 alignright cxth-slider-val'";
 
 		$this->output_main_control( 'number', $number_attr );
 	}
@@ -177,7 +177,7 @@ class CxTh_Customizer_CSS_Control extends WP_Customize_Control {
 		);
 
 		//Thickness
-		$this->render_input_subcontrol( 'Thickness:', $values[ $key_offset + 0 ], 'range', "min='0' max='25' step='1' class='cxth-val cxth-val-down'" );
+		$this->render_range_subcontrol( 'Thickness:', $values[ $key_offset + 0 ], "min='0' max='25' step='1' class='cxth-val cxth-val-down'" );
 		//Border style
 		$this->render_select_subcontrol( 'Border style:', $styles, $values[ $key_offset + 1 ], "class='cxth-val cxth-val-outset'" );
 		//Border Color
@@ -299,9 +299,9 @@ class CxTh_Customizer_CSS_Control extends WP_Customize_Control {
 		$attrs = "min='0' max='160' step='1' class='cxth-val";
 
 		//Top/Bottom
-		$this->render_input_subcontrol( 'Top/Bottom:', $this->multi_values[0], 'range', "$attrs cxth-val-up'" );
+		$this->render_range_subcontrol( 'Top/Bottom:', $this->multi_values[0], "$attrs cxth-val-up'" );
 		//Right/left
-		$this->render_input_subcontrol( 'Right/left:', $this->multi_values[1], 'range', "$attrs cxth-val-right'" );
+		$this->render_range_subcontrol( 'Right/left:', $this->multi_values[1], "$attrs cxth-val-right'" );
 
 		$this->output_main_control();
 	}
@@ -315,15 +315,15 @@ class CxTh_Customizer_CSS_Control extends WP_Customize_Control {
 	protected function output_shadow_controls( $box_shadow = '', $key_index = 0 ) {
 
 		//Left/Right offset
-		$this->render_input_subcontrol( 'Left/Right:', $this->multi_values[ $key_index ++ ], 'range', "min='-25' max='25' class='cxth-val cxth-val-down'" );
+		$this->render_range_subcontrol( 'Left/Right:', $this->multi_values[ $key_index ++ ], "min='-25' max='25' class='cxth-val cxth-val-down'" );
 		//Up/Down offset
-		$this->render_input_subcontrol( 'Up/Down:', $this->multi_values[ $key_index ++ ], 'range', "min='-25' max='25' class='cxth-val cxth-val-right'" );
+		$this->render_range_subcontrol( 'Up/Down:', $this->multi_values[ $key_index ++ ], "min='-25' max='25' class='cxth-val cxth-val-right'" );
 		//Blur
-		$this->render_input_subcontrol( 'Blur:', $this->multi_values[ $key_index ++ ], 'range', "max='25' class='cxth-val cxth-val-blur'" );
+		$this->render_range_subcontrol( 'Blur:', $this->multi_values[ $key_index ++ ], "max='25' class='cxth-val cxth-val-blur'" );
 
 		if ( 'box-shadow' == $box_shadow ) {
 			//Output box shadow spread
-			$this->render_input_subcontrol( 'Spread:', $this->multi_values[ $key_index ++ ], 'range', "max='25' class='cxth-val cxth-val-spread'" );
+			$this->render_range_subcontrol( 'Spread:', $this->multi_values[ $key_index ++ ], "max='25' class='cxth-val cxth-val-spread'" );
 		}
 		//Color
 		$this->render_input_subcontrol( 'Color:', $this->multi_values[ $key_index ++ ], 'text', "class='cxth-val cxth-val-color cxth-color'" );
@@ -339,6 +339,23 @@ class CxTh_Customizer_CSS_Control extends WP_Customize_Control {
 	 */
 	protected function render_input_subcontrol( $title, $val_now, $type = 'hidden', $attrs = '' ) {
 		$this->render_subcontrol( $title, $this->get_input( $val_now, $type, $attrs ) );
+	}
+
+	/**
+	 * Outputs sub control with input
+	 * @param array $options Options to output
+	 * @param string $val_now Current value of the field
+	 * @param string $attrs Additional attributes
+	 */
+	protected function render_range_subcontrol( $title, $val_now, $attrs = '' ) {
+		$rng_atts = str_replace( "class='cxth-val", "class='cxth-val cxth-width-80", $attrs );
+		$num_atts = str_replace( "class='cxth-val", "class='cxth-val cxth-width-20 cxth-range-support", $attrs );
+
+		$this->render_subcontrol(
+			$title,
+			$this->get_input( $val_now, 'range', $rng_atts ) .
+			$this->get_input( $val_now, 'number', $num_atts )
+		);
 	}
 
 	/**
