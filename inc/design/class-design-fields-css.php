@@ -79,7 +79,7 @@ class CxTh_Design_Fields_Css {
 				$format = str_replace( '%s', '%1$s', $format );
 			}
 			if ( method_exists( $this, $method ) ) {
-				$style = $this->$method( explode( '|', $setting ) ); // Get style from callback
+				$style = $this->$method( explode( '|', $setting ), $f ); // Get style from callback
 				if ( $style ) {
 					$style = sprintf( $format, $style );
 				}
@@ -179,11 +179,15 @@ class CxTh_Design_Fields_Css {
 	/**
 	 * Returns the styles from type of control
 	 * @param array $vals Current settings
+	 * @param array $f Fields data
 	 * @return string $css
 	 */
-	protected function spacing_field_css( $vals ) {
+	protected function spacing_field_css( $vals, $f ) {
 		if ( isset( $vals[1] ) ) {
-			return implode( 'px ', $vals ) . 'px';
+
+			$unit = isset( $f['unit'] ) ? $f['unit'] : 'px';
+
+			return implode( "$unit ", $vals ) . $unit;
 		}
 
 		return '';
