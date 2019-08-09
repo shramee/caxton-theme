@@ -31,6 +31,8 @@ class Caxton_Theme {
 		add_action( 'after_setup_theme', [ $this, 'content_width' ], 0 );
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'customize_save_after', [ $this, 'save_settings' ] );
+		add_filter( 'wp_page_menu_args', [ $this, 'default_wp_page_menu_attributes' ] );
+		add_filter( 'wp_nav_menu_args', [ $this, 'default_wp_nav_menu_attributes' ] );
 	}
 
 	/**
@@ -199,6 +201,33 @@ class Caxton_Theme {
 		update_option( 'cxth_customize_settings', $settings );
 	}
 
+	/**
+	 * Sets items_wrap for compatibility with wp_page_menu
+	 * @param array $args
+	 * @return mixed
+	 */
+	public function default_wp_nav_menu_attributes( $args ) {
+		$args['items_wrap'] = '<ul>%3$s</ul>';
+//		$args['walker'] = new Walker_Nav_Menu;
+		return $args;
+	}
+
+	/**
+	 * Sets menu attributes from container attributes when set for compatibility with wp_nav_menu
+	 * @param array $args
+	 * @return mixed
+	 */
+	public function default_wp_page_menu_attributes( $args ) {
+
+		if ( $args['items_wrap'] ) {
+			$args['menu_id']    = $args['container_id'];
+			$args['menu_class'] = $args['container_class'];
+			$args['before']     = '<ul>';
+			$args['after']      = '</ul>';
+		}
+
+		return $args;
+	}
 }
 
 Caxton_Theme::instance();
