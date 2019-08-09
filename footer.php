@@ -15,7 +15,8 @@
 </div><!-- #content -->
 
 <?php
-cxth_get_tpl( 'footer', '<footer id="colophon" class="site-footer">', '</footer><!-- #colophon -->' );
+cxth_get_tpl( 'footer', '<footer id="colophon" class="site-footer"><div class="col-full">', '</div></footer><!-- #colophon -->' );
+
 ?>
 </div><!-- #page -->
 

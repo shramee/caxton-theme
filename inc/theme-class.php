@@ -87,6 +87,7 @@ class Caxton_Theme {
 		register_nav_menus( array(
 			'main-menu' => esc_html__( 'Main menu', 'cxth' ),
 			'mobile-menu' => esc_html__( 'Mobile menu', 'cxth' ),
+			'footer-menu' => esc_html__( 'Footer menu (few items and no sub menus)', 'cxth' ),
 		) );
 
 		/*
