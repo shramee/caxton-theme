@@ -7,4 +7,4 @@ node_modules
 # Generated files in sass directory
 sass/*.css
 sass/*.map
-customizer.css
+custom.css

@@ -42,9 +42,8 @@ class Caxton_Theme {
 		$this->settings = get_option( 'cxth_customize_settings', [] );
 		if ( is_customize_preview() || isset( $_GET['caxton-theme-debug'] ) ) {
 			$this->settings = wp_parse_args( CxTh_Design::live_settings(), $this->settings );
-
-			$this->settings['rev'] = '9.9.9';
-		} else if ( empty( $this->settings['rev'] ) ) {
+			$this->settings['rev'] = '0.beta.' . date( 'Ymd' );
+		} else if ( ! file_exists( get_stylesheet_directory() . 'custom.css' ) ) {
 			$this->save_settings();
 		}
 
@@ -152,7 +151,7 @@ class Caxton_Theme {
 	}
 
 	public function scripts_and_styles() {
-		wp_enqueue_style( 'caxton-customizer', get_template_directory_uri() . '/customizer.css', [], $this->settings['rev'] );
+		wp_enqueue_style( 'caxton-customizer', get_template_directory_uri() . '/custom.css', [], $this->settings['rev'] );
 
 		if ( ! empty( $this->settings['css'] ) ) {
 			wp_add_inline_style( 'caxton-customizer', $this->settings['css'] );
@@ -187,7 +186,7 @@ class Caxton_Theme {
 
 		$settings = CxTh_Design::live_settings();
 
-		$customizer_file = fopen( trailingslashit( get_stylesheet_directory() ) . 'customizer.css', "w" );
+		$customizer_file = fopen( trailingslashit( get_stylesheet_directory() ) . 'custom.css', "w" );
 
 		if ( fwrite( $customizer_file, $settings['css'] ) ) {
 			unset( $settings['css'] ); // Unset css property if written to file.
