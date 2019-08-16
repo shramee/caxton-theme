@@ -74,14 +74,15 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 function cxth_get_tpl( $name, $before, $after ) {
 	$prefix = apply_filters( 'cxth_content_post_name_prefix', 'cxth' );
 
-	$content_post = get_post( [
+	$content_post = get_posts( [
 		'name' => "$prefix-$name",
 		'post_type' => 'any',
 	] );
 
 	echo $before;
 
-	if ( 0&&$content_post ) {
+	if ( $content_post ) {
+		$content_post = $content_post[0];
 		echo apply_filters( 'the_content', $content_post->post_content );
 	} else {
 		get_template_part( "template-parts/$name" );
