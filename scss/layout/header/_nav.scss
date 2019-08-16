@@ -39,3 +39,20 @@
 		display: block;
 	}
 }
+
+.caxton-hamburger {
+	border-top: .2em solid;
+	width: 1em;
+	height: 1em;
+	box-sizing: border-box;
+
+	&:before,
+	&:after {
+		content: '';
+		border: inherit;
+	}
+
+	&:before {
+		margin: auto 0;
+	}
+}
