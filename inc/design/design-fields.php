@@ -76,90 +76,16 @@ $fields = [
 	],
 	'Header'  => [
 
-		'header-bg-color'      => [
-			'label'       => 'Background color',
-			'type'        => 'color',
+		'header'      => [
+			'label'       => '',
+			'type'        => 'box',
 			'description' => 'Header background color',
-			'section'     => [ '0' => 'header_image', '1' => 'Header layout' ],
+//			'section'     => [ '0' => 'header_image', '1' => 'Header layout' ],
 			'user'        => 'business',
-			'output'      => '.site-header{background-color:%s;}',
+			'output'      => '.site-header{%s}',
 			'default'     => $header_color,
 		],
-		'header-border'        => [
-			'label'       => 'Border',
-			'type'        => 'all-border',
-			'description' => 'Set border of header',
-			'section'     => 'existing_header_image',
-			'user'        => 'creative',
-			'output'      => '.site-header{border:%s;}',
-		],
 
-		// region Heading icons
-		'heading-social-icons' => [
-			'label'       => 'Navigation Social Icons',
-			'description' => 'Display appropriate icons in menu linking to the URL specified.',
-			'type'        => 'heading',
-			'section'     => 'Social icons',
-			'user'        => 'business',
-			'priority'    => '40',
-		],
-		'social[facebook]'     => [
-			'label'    => 'Facebook Page URL',
-			'type'     => 'text',
-			'section'  => 'Social icons',
-			'user'     => 'business',
-			'priority' => '45',
-		],
-		'social[twitter]'      => [
-			'label'    => 'Twitter Page URL',
-			'type'     => 'text',
-			'section'  => 'Social icons',
-			'user'     => 'business',
-			'priority' => '50',
-		],
-		'social[google]'       => [
-			'label'    => 'Google+ Page URL',
-			'type'     => 'text',
-			'section'  => 'Social icons',
-			'user'     => 'business',
-			'priority' => '55',
-		],
-		'social[youtube]'      => [
-			'label'    => 'Youtube Channel URL',
-			'type'     => 'text',
-			'section'  => 'Social icons',
-			'user'     => 'business',
-			'priority' => '60',
-		],
-		'social[github]'       => [
-			'label'    => 'Github Page URL',
-			'type'     => 'text',
-			'section'  => 'Social icons',
-			'user'     => 'business',
-			'priority' => '65',
-		],
-		'social[linkedin]'     => [
-			'label'    => 'LinkedIn Profile URL',
-			'type'     => 'text',
-			'section'  => 'Social icons',
-			'user'     => 'business',
-			'priority' => '70',
-		],
-		'social[instagram]'    => [
-			'label'    => 'InstaGram Page URL',
-			'type'     => 'text',
-			'section'  => 'Social icons',
-			'user'     => 'business',
-			'priority' => '65',
-		],
-		'social[vkontacte]'    => [
-			'label'    => 'V Kontacte Page URL',
-			'type'     => 'text',
-			'section'  => 'Social icons',
-			'user'     => 'business',
-			'priority' => '70',
-		],
-		// endregion Heading icons
 	],
 
 	'Primary Menu' => [
@@ -252,7 +178,7 @@ $fields = [
 		// region Submenu
 		'prinav-submenu'      => [
 			'label'    => 'Sub-Menu',
-			'type'     => 'all-custo',
+			'type'     => 'box',
 			'section'  => 'Submenu',
 			'user'     => 'business',
 			'output'   => '.main-navigation li ul{%s}',
@@ -344,7 +270,7 @@ $fields = [
 
 		'mobnav'      => [
 			'label'    => '',
-			'type'     => 'all-custo',
+			'type'     => 'box',
 			'section'  => 'Menu',
 			'user'     => 'business',
 			'output'   => '.mobile-navigation{%s}',
@@ -359,7 +285,7 @@ $fields = [
 
 		' nnv-icon'      => [
 			'label'    => '',
-			'type'     => 'all-custo',
+			'type'     => 'box',
 			'section'  => 'Menu',
 			'user'     => 'business',
 			'output'   => '.mobile-navigation{%s}',
@@ -427,7 +353,7 @@ $fields = [
 		// region Submenu
 		'mobnav-submenu'      => [
 			'label'    => 'Sub-Menu',
-			'type'     => 'all-custo',
+			'type'     => 'box',
 			'section'  => 'Submenu',
 			'user'     => 'business',
 			'output'   => '.mobile-navigation li ul{%s}',
@@ -538,7 +464,7 @@ if ( ! $panels ) {
 foreach ( $panels as $panel => &$fields ) {
 	$ids = array_keys( $fields );
 	foreach ( $fields as $id => $f ) {
-		if ( 'all-custo' == $f['type'] ) {
+		if ( 'box' == $f['type'] ) {
 
 			$defaults = empty( $f['defaults'] ) ? [] : $f['defaults'];
 
@@ -583,7 +509,7 @@ foreach ( $panels as $panel => &$fields ) {
 			$f['default']      = $defaults['border'];
 			$f['type']         = 'all-border';
 			$f['label']        = $label . ' Border';
-			$f['output']       = sprintf( $base_output, 'border:%spx' );
+			$f['output']       = sprintf( $base_output, '%s' );
 			$new_fields[ $id ] = $f;
 
 			//Rounded corners

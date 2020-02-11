@@ -242,7 +242,7 @@ if ( ! class_exists( 'CxTh_Customizer_Manager' ) ) {
 					'default' => '',
 				) );
 				if ( empty( $option['section'] ) ) {
-					$option['section'] = $this->token . '-' . $this->id;
+					$option['section'] = "$this->token-$this->id";
 				} else {
 					$this->get_customizer_section_from_field( $option, $sections );
 				}
@@ -268,7 +268,7 @@ if ( ! class_exists( 'CxTh_Customizer_Manager' ) ) {
 				if ( 0 === strpos( $sec, 'existing_' ) ) {
 					$sec = str_replace( 'existing_', '', $sec );
 				} else {
-					$sec              = $this->section_prefix . cxth_make_id( $sec );
+					$sec              = "$this->section_prefix-$this->id-" . cxth_make_id( $sec );
 					$sections[ $sec ] = $option['section'];
 				}
 			}
