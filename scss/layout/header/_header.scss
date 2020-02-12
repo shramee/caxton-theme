@@ -3,5 +3,12 @@ p.site-description {
 	margin: 0;
 }
 
+.mobile-navigation {
+	position: absolute;
+	right: 10px;
+	width: 300px;
+	z-index: 999;
+}
+
 @import 'site-branding';
 @import 'nav';

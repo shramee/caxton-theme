@@ -16,7 +16,7 @@ $main_menu = wp_nav_menu( [
 
 $mobile_menu = wp_nav_menu( [
 	'theme_location' => has_nav_menu( 'mobile-menu' ) ? 'mobile-menu' : 'main-menu',
-	'container_class'     => 'mobile-navigation menu absolute border-box dn right-0 w-100',
+	'container_class'     => 'mobile-navigation menu toggle-open',
 	'container_id'        => 'mobile-nav',
 	'echo'           => false,
 ] );
@@ -26,7 +26,7 @@ $mobile_menu = wp_nav_menu( [
 
 	<?php echo $main_menu; ?>
 
-	<a class="btn dn-l" data-toggle-slide="#mobile-nav" href="#mobile-nav">
+	<a class="btn dn-l" data-toggle-class href="#">
 		<span class="caxton-hamburger flex flex-column"></span>
 	</a>
 	<?php echo $mobile_menu; ?>

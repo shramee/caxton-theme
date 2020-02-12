@@ -4,6 +4,14 @@ html, body {
 	line-height: 1.6;
 }
 
+* {
+	box-sizing: border-box;
+}
+
+table {
+	min-width: 100%;
+}
+
 .screen-reader-text {
 	clip: rect(1px, 1px, 1px, 1px);
 	height: 1px;
@@ -16,7 +24,12 @@ html, body {
 .col-full {
 	max-width: 1240px;
 	margin: auto;
-	padding: 0 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	&.pa0, &.ph0 {
+		padding-left: 0;
+		padding-right: 0;
+	}
 	.col-full {
 		padding: 0;
 	}

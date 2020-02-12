@@ -15,8 +15,7 @@
 get_header();
 ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
+	<main id="main" class="site-main">
 
 		<?php
 		if ( have_posts() ) :
@@ -26,7 +25,7 @@ get_header();
 				<header>
 					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
 				</header>
-				<?php
+			<?php
 			endif;
 
 			/* Start the Loop */
@@ -51,8 +50,7 @@ get_header();
 		endif;
 		?>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+	</main><!-- #main -->
 
 <?php
 get_sidebar();

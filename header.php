@@ -31,4 +31,5 @@
 
 
 	<div id="content" class="site-content">
-		<div class="col-full">
+		<div class="col-full flex flex-wrap flex-nowrap-l justify-stretch pa0">
+				<div id="primary" class="content-area w-100">
