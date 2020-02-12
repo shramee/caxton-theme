@@ -2,18 +2,17 @@
 /**
  * Contains fields info
  */
-
-$background = apply_filters( 'cxth_default_background', '#f5f5f5' );
+$background       = apply_filters( 'cxth_default_background', '#f5f5f5' );
 $text_line_height = apply_filters( 'cxth_text_line_height', 1.6 );
-$text_size = apply_filters( 'cxth_default_text_size', 16 );
-$text_font = apply_filters( 'cxth_default_text_color', 'Helvetica,sans-serif' );
-$text_color = apply_filters( 'cxth_default_text_font', '#454545' );
-$heading_color = apply_filters( 'cxth_default_heading_color', '#5a5a5a' );
+$text_size        = apply_filters( 'cxth_default_text_size', 16 );
+$text_font        = apply_filters( 'cxth_default_text_color', 'Helvetica,sans-serif' );
+$text_color       = apply_filters( 'cxth_default_text_font', '#454545' );
+$heading_color    = apply_filters( 'cxth_default_heading_color', '#5a5a5a' );
 
 $header_color = apply_filters( 'cxth_default_accent_color', '#ffffff' );
 $footer_color = apply_filters( 'cxth_default_accent_color', $header_color );
 
-$accent_color = apply_filters( 'cxth_default_accent_color', '#00a0e7' );
+$accent_color       = apply_filters( 'cxth_default_accent_color', '#00a0e7' );
 $accent_color_hover = apply_filters( 'cxth_default_accent_color_hover', '#33b9ff' );
 
 $fields = [
@@ -59,29 +58,38 @@ $fields = [
 			'description' => 'Set Active link color',
 			'user'        => 'creative',
 			'output'      => 'a{color:%s;}',
-			'default'  => $accent_color,
+			'default'     => $accent_color,
 			'priority'    => '25',
 		],
-		'link-hover-color'       => [
+		'link-hover-color' => [
 			'label'       => 'Link hover color',
 			'type'        => 'color',
 			'description' => 'Set Active link color',
 			'user'        => 'creative',
 			'output'      => 'a:hover{color:%s;}',
-			'default'  => $accent_color_hover,
+			'default'     => $accent_color_hover,
 			'priority'    => '25',
 		],
 	],
 	'Header'  => [
 
-		'header'      => [
-			'label'       => '',
-			'type'        => 'box',
-			'description' => 'Header background color',
-//			'section'     => [ '0' => 'header_image', '1' => 'Header layout' ],
-			'user'        => 'business',
-			'output'      => '.site-header{%s}',
-			'default'     => $header_color,
+		'header-logo-height' => [
+			'label'    => 'Header Logo size',
+			'type'     => 'range',
+			'input_attrs' => [ 'min' => 25, 'max' => 200, 'step' => 2 ],
+			'section'  => 'existing_title_tagline',
+			'user'     => 'business',
+			'output'   => '.site-logo img{height:%spx;}',
+			'priority' => 9,
+			'default'  => 50,
+		],
+
+		'header' => [
+			'label'   => '',
+			'type'    => 'box',
+			'user'    => 'business',
+			'output'  => '.site-header{%s}',
+			'default' => $header_color,
 		],
 
 	],
@@ -89,7 +97,7 @@ $fields = [
 	'Primary Menu' => [
 
 		// region Menu items
-		'prinav-it-bg-color'      => [
+		'prinav-it-bg-color'   => [
 			'label'       => 'Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -98,7 +106,7 @@ $fields = [
 			'output'      => '.main-navigation > ul > li > a{background-color:%s;}',
 			'priority'    => '5',
 		],
-		'prinav-it-text-color'    => [
+		'prinav-it-text-color' => [
 			'label'       => 'Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -108,7 +116,7 @@ $fields = [
 			'priority'    => '10',
 			'default'     => $text_color,
 		],
-		'prinav-it-gap'         => [
+		'prinav-it-gap'        => [
 			'label'       => 'Gap Between Menu Items',
 			'type'        => 'slider',
 			'description' => 'Distance between adjacent menu items.',
@@ -118,20 +126,20 @@ $fields = [
 			'priority'    => '25',
 			'default'     => '2',
 		],
-		'prinav-it-padding'          => [
-			'label'       => 'Padding',
-			'type'        => 'spacing',
-			'section'     => 'Menu Items',
-			'user'        => 'designer',
-			'output'      => '.main-navigation li a{padding:%s;}',
-			'priority'    => '20',
-			'default'     => '7|10',
+		'prinav-it-padding'    => [
+			'label'    => 'Padding',
+			'type'     => 'spacing',
+			'section'  => 'Menu Items',
+			'user'     => 'designer',
+			'output'   => '.main-navigation li a{padding:%s;}',
+			'priority' => '20',
+			'default'  => '7|10',
 		],
 		// endregion Menu items
 
 		// region Menu items Hover
 
-		'prinav-it-ho-bg-color'   => [
+		'prinav-it-ho-bg-color'      => [
 			'label'       => 'Hover Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -140,7 +148,7 @@ $fields = [
 			'output'      => '.main-navigation > ul > li > a:hover{background-color:%s;}',
 			'priority'    => '5',
 		],
-		'prinav-it-ho-text-color' => [
+		'prinav-it-ho-text-color'    => [
 			'label'       => 'Hover Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -153,7 +161,7 @@ $fields = [
 		// endregion Menu items Hover
 
 		// region Menu items Active
-		'prinav-it-ac-bg-color'   => [
+		'prinav-it-ac-bg-color'      => [
 			'label'       => 'Active menu item Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -162,7 +170,7 @@ $fields = [
 			'output'      => '.main-navigation > ul > li.current-menu-item > a,.main-navigation > ul > li.current-menu-ancestor > a{background-color:%s;}',
 			'priority'    => '5',
 		],
-		'prinav-it-ac-text-color' => [
+		'prinav-it-ac-text-color'    => [
 			'label'       => 'Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -174,7 +182,7 @@ $fields = [
 		// endregion Menu items Active
 
 		// region Submenu
-		'prinav-submenu'      => [
+		'prinav-submenu'             => [
 			'label'    => 'Sub-Menu',
 			'type'     => 'box',
 			'section'  => 'Submenu',
@@ -182,16 +190,16 @@ $fields = [
 			'output'   => '.main-navigation li ul{%s}',
 			'priority' => '5',
 			'defaults' => [
-				'padding' => '5|5',
-				'bg-color' => '#fff',
+				'padding'       => '5|5',
+				'bg-color'      => '#fff',
 				'border-radius' => '0',
-				'shadow' => '|0|0|3|0|rgba(0,0,0,.1)',
+				'shadow'        => '|0|0|3|0|rgba(0,0,0,.1)',
 			],
 		],
 		// endregion Submenu
 
 		// region Submenu Items
-		'prinav-su-it-padding' => [
+		'prinav-su-it-padding'       => [
 			'label'       => 'Padding',
 			'type'        => 'spacing',
 			'description' => 'Padding',
@@ -200,7 +208,7 @@ $fields = [
 			'output'      => '.main-navigation li ul a{padding:%s;}',
 			'priority'    => '15',
 		],
-		'prinav-su-it-bg-color'   => [
+		'prinav-su-it-bg-color'      => [
 			'label'       => 'Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -209,7 +217,7 @@ $fields = [
 			'output'      => '.main-navigation > ul > li ul a{background-color:%s;}',
 			'priority'    => '5',
 		],
-		'prinav-su-it-text-color' => [
+		'prinav-su-it-text-color'    => [
 			'label'       => 'Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -266,7 +274,7 @@ $fields = [
 
 	'Mobile Menu' => [
 
-		'mobnav'      => [
+		'mobnav' => [
 			'label'    => '',
 			'type'     => 'box',
 			'section'  => 'Menu',
@@ -274,14 +282,14 @@ $fields = [
 			'output'   => '.mobile-navigation{%s}',
 			'priority' => '5',
 			'defaults' => [
-				'padding' => '5|7',
-				'bg-color' => '#fff',
+				'padding'       => '5|7',
+				'bg-color'      => '#fff',
 				'border-radius' => '0',
-				'shadow' => '|0|0|3|0|rgba(0,0,0,.1)',
+				'shadow'        => '|0|0|3|0|rgba(0,0,0,.1)',
 			],
 		],
 
-		' nnv-icon'      => [
+		' nnv-icon'                  => [
 			'label'    => '',
 			'type'     => 'box',
 			'section'  => 'Menu',
@@ -289,15 +297,15 @@ $fields = [
 			'output'   => '.mobile-navigation{%s}',
 			'priority' => '5',
 			'defaults' => [
-				'padding' => '10|10',
-				'bg-color' => '#fff',
+				'padding'       => '10|10',
+				'bg-color'      => '#fff',
 				'border-radius' => '0',
-				'shadow' => '|0|0|3|0|rgba(0,0,0,.1)',
+				'shadow'        => '|0|0|3|0|rgba(0,0,0,.1)',
 			],
 		],
 
 		// region Menu items
-		'mobnav-it-bg-color'      => [
+		'mobnav-it-bg-color'         => [
 			'label'       => 'Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -306,7 +314,7 @@ $fields = [
 			'output'      => '.mobile-navigation li a{background-color:%s;}',
 			'priority'    => '5',
 		],
-		'mobnav-it-text-color'    => [
+		'mobnav-it-text-color'       => [
 			'label'       => 'Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -317,18 +325,18 @@ $fields = [
 			'default'     => $text_color,
 		],
 		'mobnav-it-padding'          => [
-			'label'       => 'Padding',
-			'type'        => 'spacing',
-			'section'     => 'Menu Items',
-			'user'        => 'designer',
-			'output'      => '.mobile-navigation li a{padding:%s;}',
-			'priority'    => '20',
-			'default'     => '7|10',
+			'label'    => 'Padding',
+			'type'     => 'spacing',
+			'section'  => 'Menu Items',
+			'user'     => 'designer',
+			'output'   => '.mobile-navigation li a{padding:%s;}',
+			'priority' => '20',
+			'default'  => '7|10',
 		],
 		// endregion Menu items
 
 		// region Menu items Active
-		'mobnav-it-ac-bg-color'   => [
+		'mobnav-it-ac-bg-color'      => [
 			'label'       => 'Active menu item Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -337,7 +345,7 @@ $fields = [
 			'output'      => '.mobile-navigation > ul > li.current-menu-item > a,.mobile-navigation > ul > li.current-menu-ancestor > a{background-color:%s;}',
 			'priority'    => '5',
 		],
-		'mobnav-it-ac-text-color' => [
+		'mobnav-it-ac-text-color'    => [
 			'label'       => 'Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -349,7 +357,7 @@ $fields = [
 		// endregion Menu items Active
 
 		// region Submenu
-		'mobnav-submenu'      => [
+		'mobnav-submenu'             => [
 			'label'    => 'Sub-Menu',
 			'type'     => 'box',
 			'section'  => 'Submenu',
@@ -357,16 +365,16 @@ $fields = [
 			'output'   => '.mobile-navigation li ul{%s}',
 			'priority' => '5',
 			'defaults' => [
-				'padding' => '5|10',
-				'bg-color' => '#fff',
+				'padding'       => '5|10',
+				'bg-color'      => '#fff',
 				'border-radius' => '0',
-				'shadow' => '|0|0|3|0|rgba(0,0,0,.1)',
+				'shadow'        => '|0|0|3|0|rgba(0,0,0,.1)',
 			],
 		],
 		// endregion Submenu
 
 		// region Submenu Items
-		'mobnav-su-it-padding' => [
+		'mobnav-su-it-padding'       => [
 			'label'       => 'Padding',
 			'type'        => 'spacing',
 			'description' => 'Padding',
@@ -375,7 +383,7 @@ $fields = [
 			'output'      => '.mobile-navigation li ul a{padding:%s;}',
 			'priority'    => '15',
 		],
-		'mobnav-su-it-bg-color'   => [
+		'mobnav-su-it-bg-color'      => [
 			'label'       => 'Background color',
 			'type'        => 'color',
 			'description' => 'Text color for active menu item',
@@ -384,7 +392,7 @@ $fields = [
 			'output'      => '.mobile-navigation li ul a{background-color:%s;}',
 			'priority'    => '5',
 		],
-		'mobnav-su-it-text-color' => [
+		'mobnav-su-it-text-color'    => [
 			'label'       => 'Text color',
 			'type'        => 'color',
 			'description' => 'Background color for active menu item',
@@ -418,7 +426,7 @@ $fields = [
 
 	],
 
-	'Footer'       => [
+	'Footer' => [
 		'footer-bg-color' => [
 			'label'    => 'BG color',
 			'type'     => 'color',
@@ -427,7 +435,7 @@ $fields = [
 			'priority' => '5',
 			'default'  => $footer_color,
 		],
-		'footer-border' => [
+		'footer-border'   => [
 			'label'    => 'Border',
 			'type'     => 'all-border',
 			'user'     => 'creative',
@@ -435,7 +443,7 @@ $fields = [
 			'priority' => '5',
 			'default'  => $footer_color,
 		],
-		'footer-padding' => [
+		'footer-padding'  => [
 			'label'    => 'Padding',
 			'type'     => 'spacing',
 			'user'     => 'business',
