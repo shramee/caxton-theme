@@ -24,7 +24,7 @@ class CxTh_Design_Customizer_Register {
 			'spacing'     => 'CxTh_Customizer_CSS_Control',
 		),
 		'token'            => 'cxth',
-		'priority'         => 7,
+		'priority'         => 25,
 	);
 
 	/**

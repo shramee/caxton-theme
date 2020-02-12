@@ -16,8 +16,6 @@ $footer_color = apply_filters( 'cxth_default_accent_color', $header_color );
 $accent_color = apply_filters( 'cxth_default_accent_color', '#00a0e7' );
 $accent_color_hover = apply_filters( 'cxth_default_accent_color_hover', '#33b9ff' );
 
-// @TODO Get working Heading icons
-
 $fields = [
 	'General' => [
 		'background-color' => [
