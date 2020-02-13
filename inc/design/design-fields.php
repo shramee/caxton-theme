@@ -89,7 +89,12 @@ $fields = [
 			'type'    => 'box',
 			'user'    => 'business',
 			'output'  => '.site-header{%s}',
-			'default' => $header_color,
+			'default' => [
+				'padding'       => '5|5',
+				'bg-color'      => $header_color,
+				'border-radius' => '0',
+				'shadow'        => '|0|0|3|0|rgba(0,0,0,.1)',
+			],
 		],
 
 	],
@@ -97,15 +102,6 @@ $fields = [
 	'Primary Menu' => [
 
 		// region Menu items
-		'prinav-it-bg-color'   => [
-			'label'       => 'Background color',
-			'type'        => 'color',
-			'description' => 'Text color for active menu item',
-			'section'     => 'Menu Items',
-			'user'        => 'business',
-			'output'      => '.main-navigation > ul > li > a{background-color:%s;}',
-			'priority'    => '5',
-		],
 		'prinav-text'        => [
 			'label'       => '',
 			'type'        => 'typography',
@@ -115,10 +111,19 @@ $fields = [
 			'default'     => "||||$text_size|$text_font|$text_color|0",
 			'priority'    => '10',
 		],
+		'prinav-it-bg-color'   => [
+			'label'       => 'Background color',
+			'type'        => 'color',
+			'description' => 'Text color for active menu item',
+			'section'     => 'Menu Items',
+			'user'        => 'business',
+			'output'      => '.main-navigation > ul > li > a{background-color:%s;}',
+			'priority'    => '5',
+		],
 		'prinav-it-text-color' => [
 			'label'       => 'Text color',
 			'type'        => 'color',
-			'description' => 'Background color for active menu item',
+			'description' => 'Test color for active menu item',
 			'section'     => 'Menu Items',
 			'user'        => 'business',
 			'output'      => '.main-navigation > ul > li > a{color:%s;}',
@@ -298,19 +303,14 @@ $fields = [
 			],
 		],
 
-		' nnv-icon'                  => [
-			'label'    => '',
-			'type'     => 'box',
-			'section'  => 'Menu',
+		'mobnav-icon'                  => [
+			'label'    => 'Menu icon color',
+			'type'     => 'color',
+			'section'  => 'Icon',
 			'user'     => 'business',
-			'output'   => '.mobile-navigation{%s}',
+			'output'   => '.site-navigation .caxton-hamburger{color:%s}',
 			'priority' => '5',
-			'defaults' => [
-				'padding'       => '10|10',
-				'bg-color'      => '#fff',
-				'border-radius' => '0',
-				'shadow'        => '|0|0|3|0|rgba(0,0,0,.1)',
-			],
+			'defaults' => $accent_color,
 		],
 
 		// region Menu items
@@ -436,27 +436,11 @@ $fields = [
 	],
 
 	'Footer' => [
-		'footer-bg-color' => [
-			'label'    => 'BG color',
-			'type'     => 'color',
+		'footer' => [
+			'label'    => '',
+			'type'     => 'box',
 			'user'     => 'business',
-			'output'   => '.site-footer{background-color:%s;}',
-			'priority' => '5',
-			'default'  => $footer_color,
-		],
-		'footer-border'   => [
-			'label'    => 'Border',
-			'type'     => 'all-border',
-			'user'     => 'creative',
 			'output'   => '.site-footer{%s}',
-			'priority' => '5',
-			'default'  => $footer_color,
-		],
-		'footer-padding'  => [
-			'label'    => 'Padding',
-			'type'     => 'spacing',
-			'user'     => 'business',
-			'output'   => '.site-footer{padding:%s;}',
 			'priority' => '5',
 			'default'  => $footer_color,
 		],
