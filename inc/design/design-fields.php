@@ -106,6 +106,15 @@ $fields = [
 			'output'      => '.main-navigation > ul > li > a{background-color:%s;}',
 			'priority'    => '5',
 		],
+		'prinav-text'        => [
+			'label'       => '',
+			'type'        => 'typography',
+			'description' => 'Specify default font styling of header navigation',
+			'user'        => 'business',
+			'output'      => 'body{%s}',
+			'default'     => "||||$text_size|$text_font|$text_color|0",
+			'priority'    => '10',
+		],
 		'prinav-it-text-color' => [
 			'label'       => 'Text color',
 			'type'        => 'color',
