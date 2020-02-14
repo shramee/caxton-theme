@@ -71,7 +71,6 @@ class CxTh_Design extends CxTh_Design_Fields_Css {
 		$this->gf_data = cxth_get_fonts( 'data' );
 		$this->set_properties();
 
-		add_action( 'customize_save_after', array( $this, 'save_settings' ) );
 		if ( is_customize_preview() ) {
 			add_action( 'wp', array( $this, 'set_live_properties' ) );
 		}
