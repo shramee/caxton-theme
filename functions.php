@@ -75,7 +75,7 @@ function cxth_get_tpl( $name, $before, $after ) {
 	$prefix = apply_filters( 'cxth_content_post_name_prefix', 'cxth' );
 
 	$content_post = get_posts( [
-		'name' => "$prefix-$name",
+		'name' => $prefix . '-' . str_replace( '/', '-', $name ),
 		'post_type' => 'any',
 	] );
 

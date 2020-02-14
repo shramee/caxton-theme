@@ -9,7 +9,7 @@
 
 <div class="flex items-center">
 <?php
-get_template_part( 'template-parts/header/site', 'branding' );
-get_template_part( 'template-parts/header/site', 'navigation' );
+cxth_get_tpl( 'header/site-branding', '<div class="site-branding">', '</div><!-- .site-branding -->' );
+cxth_get_tpl( 'header/site-navigation', '<nav class="site-navigation">', '</nav>' );
 ?>
 </div>
