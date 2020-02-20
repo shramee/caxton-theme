@@ -44,8 +44,22 @@ img {
 	height: auto;
 }
 
+.has-text-align- {
+	&center {
+		text-align: center;
+	}
+
+	&left {
+		text-align: left;
+	}
+
+	&right {
+		text-align: right;
+	}
+}
+
 h1, h2, h3, h4, h5, h6 {
-	line-height: 1.2;
+	line-height: 1.4;
 	a, a:hover {
 		color: inherit;
 	}
