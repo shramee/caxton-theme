@@ -189,7 +189,7 @@ class CxTh_Customizer_CSS_Control extends WP_Customize_Control {
 	 * @since 1.0.0
 	 */
 	protected function render_typography_content() {
-		$vals = 8 == count( $this->multi_values ) ? $this->multi_values : array( '', '', '', '', '', '', '', 0, );
+		$vals = 9 == count( $this->multi_values ) ? $this->multi_values : array( '', '', '', '', '', '', '', 0, 1.6 );
 		$fonts  = array(
 			"" => 'Default',
 			"Helvetica,sans-serif" => 'Helvetica',
@@ -218,6 +218,8 @@ class CxTh_Customizer_CSS_Control extends WP_Customize_Control {
 		$this->render_input_subcontrol( 'Color:', $vals[6], 'text', "class='cxth-val cxth-val-color cxth-color'" );
 		//Letter spacing
 		$this->render_input_subcontrol( 'Letter spacing (em):', $vals[7], 'number', "min='-0.9' max='1.6' step='0.05' class='cxth-val cxth-val-lspacing'" );
+		//Line height
+		$this->render_input_subcontrol( 'Line height:', $vals[8], 'number', "max='3.5' step='.05' class='cxth-val cxth-val-right'" );
 
 		$this->output_main_control();
 	}

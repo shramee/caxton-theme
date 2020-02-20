@@ -27,6 +27,7 @@ class CxTh_Design_Fields_Css {
 		5 => 'font-family:%s,sans-serif;',
 		6 => 'color:%s;',
 		7 => 'letter-spacing:%sem;',
+		8 => 'line-height:%s;',
 	);
 
 	/** @var string Google fonts url */

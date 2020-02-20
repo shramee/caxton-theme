@@ -53,7 +53,7 @@ $fields = [
 			'user'        => 'business',
 			'section'     => 'Typography',
 			'output'      => 'body{%s}',
-			'default'     => "||||$text_size|$text_font|$text_color|0",
+			'default'     => "||||$text_size|$text_font|$text_color|0|1.6",
 			'priority'    => '10',
 		],
 		'heading-font'     => [
@@ -63,7 +63,7 @@ $fields = [
 			'user'        => 'business',
 			'section'     => 'Typography',
 			'output'      => 'h1,h2,h3,h4,h5,h6,.entry-title{%s}',
-			'default'     => '||||' . 2 * $text_size . "|$text_font|$heading_color|0",
+			'default'     => '||||' . 2 * $text_size . "|$text_font|$heading_color|0|1.6",
 			'priority'    => '15',
 		],
 		'heading2-font'     => [
@@ -194,7 +194,7 @@ $fields = [
 			'description' => 'Specify default font styling of header navigation',
 			'user'        => 'business',
 			'output'      => 'body{%s}',
-			'default'     => "||||$text_size|$text_font|$text_color|0",
+			'default'     => "||||$text_size|$text_font|$text_color|0|1.6",
 			'priority'    => '10',
 		],
 		'prinav-it-bg-color'   => [
