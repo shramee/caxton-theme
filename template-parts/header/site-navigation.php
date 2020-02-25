@@ -24,7 +24,7 @@ $mobile_menu = wp_nav_menu( [
 
 <?php echo $main_menu; ?>
 
-<a class="btn dn-l" data-toggle-class href="#">
+<a class="dn-l" data-toggle-class href="#">
 	<span class="caxton-hamburger flex flex-column"> </span>
 </a>
 <?php echo $mobile_menu; ?>
