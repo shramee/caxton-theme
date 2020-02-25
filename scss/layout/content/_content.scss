@@ -6,3 +6,8 @@
 .entry-title, .widget-title {
 	margin-top: 0;
 }
+
+[type=button], button, .btn, .btn2 {
+	display: inline-block;
+	cursor: pointer;
+}
