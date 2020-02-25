@@ -22,7 +22,7 @@ if ( ! class_exists( 'Caxton' ) ) {
 			) . '</p>' .
 			'<p><a style="background:#e25c4e;border-color:#d23c1e;text-shadow:none;box-shadow:0 1px 0 #883413;" href="' .
 			admin_url( 'plugin-install.php?s=caxton&tab=search&type=term' ) . '" class="button-primary button-pootle">' .
-			__( 'Install Caxton', 'sfp_blocks' ) . '</a></p>' .
+			__( 'Install Caxton', 'caxton-theme' ) . '</a></p>' .
 			'</div>';
 	}
 

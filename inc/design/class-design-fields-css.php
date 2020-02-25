@@ -33,6 +33,9 @@ class CxTh_Design_Fields_Css {
 	/** @var string Google fonts url */
 	protected $gf_url = '';
 
+	/** @var array Color option values */
+	protected $colors = [];
+
 	/**
 	 * Generates CSS data from settings
 	 * @action wp
@@ -43,9 +46,12 @@ class CxTh_Design_Fields_Css {
 		if ( empty( $f['default'] ) ) {
 			$f['default'] = '';
 		}
-
 		//Getting setting in a var
 		$setting = get_option( $id, $f['default'] );
+
+		if ( in_array( $f['type'], [ 'color', 'alpha-color' ] ) ) {
+			$this->colors[ $id ] = $setting;
+		}
 
 		if ( $this->is_field_css( $setting, $f ) ) {
 			return $this->field_css( $setting, $f['output'], $f );

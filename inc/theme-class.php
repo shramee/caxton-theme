@@ -30,6 +30,7 @@ class Caxton_Theme {
 		add_action( 'wp', [ $this, 'wp' ] );
 		add_action( 'after_setup_theme', [ $this, 'content_width' ], 0 );
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
+		add_action( 'cxth_design_components', [ $this, 'editor_color_settings' ] );
 		add_action( 'customize_save_after', [ $this, 'save_settings' ] );
 		add_filter( 'wp_page_menu_args', [ $this, 'default_wp_page_menu_attributes' ] );
 		add_filter( 'wp_nav_menu_args', [ $this, 'default_wp_nav_menu_attributes' ] );
@@ -39,11 +40,10 @@ class Caxton_Theme {
 	 * Setup settings and page hooks
 	 */
 	public function wp() {
-		$this->settings = get_option( 'cxth_customize_settings', [] );
 		if ( is_customize_preview() || isset( $_GET['caxton-theme-debug'] ) ) {
 			$this->settings = wp_parse_args( CxTh_Design::live_settings(), $this->settings );
 			$this->settings['rev'] = '0.beta.' . date( 'Ymd' );
-		} else if ( ! file_exists( get_stylesheet_directory() . 'custom.css' ) ) {
+		} else if ( ! file_exists( trailingslashit( get_stylesheet_directory() ) . 'custom.css' ) ) {
 			$this->save_settings();
 		}
 
@@ -56,6 +56,8 @@ class Caxton_Theme {
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 */
 	public function setup() {
+		$this->settings = get_option( 'cxth_customize_settings', [] );
+
 		/*
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
@@ -116,6 +118,34 @@ class Caxton_Theme {
 			'flex-height' => true,
 			'header-text' => [ 'site-title', 'site-description' ],
 		] );
+
+		add_theme_support( 'editor-color-palette', $this->editor_colors() );
+	}
+
+	protected function editor_colors() {
+		$color_settings = $this->settings['colors'];
+
+		$color_labels = [
+			'bg'       => 'Background color',
+			'link'     => 'Link color',
+			'link-hov' => 'Link hover color',
+			'btn1'     => 'Button color',
+			'btn2'     => 'Secondary Button color',
+			'header'   => 'Header color',
+			'footer'   => 'Footer color',
+		];
+
+		$gb_colors = [];
+
+		foreach ( $color_labels as $slug => $lbl ) {
+			$gb_colors[] = [
+				'name'  => $lbl,
+				'slug'  => $slug,
+				'color' => $color_settings[$slug],
+			];
+		}
+
+		return $gb_colors;
 	}
 
 	/**
@@ -199,6 +229,7 @@ class Caxton_Theme {
 			$old_settings['rev'] = 0;
 		}
 		$settings['rev'] = ++$old_settings['rev'];
+
 		update_option( 'cxth_customize_settings', $settings );
 	}
 
@@ -211,6 +242,25 @@ class Caxton_Theme {
 		$args['items_wrap'] = '<ul>%3$s</ul>';
 //		$args['walker'] = new Walker_Nav_Menu;
 		return $args;
+	}
+
+	public function editor_color_settings( $settings ) {
+		$colors = $settings['colors'];
+
+		$settings['colors'] = [
+			'bg'       => $colors['background-color'],
+			'link'     => $colors['link-color'],
+			'link-hov' => $colors['link-hover-color'],
+			'btn1'      => $colors['button-bg-color'],
+			'btn2'  => $colors['button2-bg-color'],
+			'header'   => $colors['header-bg-color'],
+			'footer'   => $colors['footer-bg-color'],
+		];
+
+		foreach ( $settings['colors'] as $slug => $clr ) {
+			$settings['css'] .= ".has-$slug-background-color{background-color:$clr}.has-$slug-color{color:$clr}";
+		}
+		return $settings;
 	}
 
 	/**

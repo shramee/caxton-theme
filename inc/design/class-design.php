@@ -113,8 +113,9 @@ class CxTh_Design extends CxTh_Design_Fields_Css {
 
 		return apply_filters( 'cxth_design_components', array(
 			'body_class' => $this->body_class,
-			'css' => $this->css,
-			'gf_url' => $this->generate_gf_url(),
+			'css'        => $this->css,
+			'gf_url'     => $this->generate_gf_url(),
+			'colors'     => $this->colors,
 		) );
 	}
 
