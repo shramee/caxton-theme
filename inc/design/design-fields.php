@@ -14,6 +14,7 @@ $footer_color = apply_filters( 'cxth_default_accent_color', $header_color );
 
 $accent_color       = apply_filters( 'cxth_default_accent_color', '#00a0e7' );
 $accent_color_hover = apply_filters( 'cxth_default_accent_color_hover', '#33b9ff' );
+$accent_text_color  = apply_filters( 'cxth_default_accent_text_color', '#00a0e7' );
 
 $fields = [
 	'General' => [
@@ -29,7 +30,7 @@ $fields = [
 		'link-color'       => [
 			'label'       => 'Link color',
 			'type'        => 'color',
-			'description' => 'Set Active link color',
+			'description' => 'Set link color',
 			'user'        => 'creative',
 			'section'     => 'Colors',
 			'output'      => 'a{color:%s;}',
@@ -39,10 +40,74 @@ $fields = [
 		'link-hover-color' => [
 			'label'       => 'Link hover color',
 			'type'        => 'color',
-			'description' => 'Set Active link color',
+			'description' => 'Set link hover color',
 			'user'        => 'creative',
 			'section'     => 'Colors',
 			'output'      => 'a:hover{color:%s;}',
+			'default'     => $accent_color_hover,
+			'priority'    => '15',
+		],
+		'button'       => [
+			'label'       => 'Button',
+			'type'        => 'box',
+			'user'        => 'creative',
+			'section'     => 'Buttons',
+			'default'     => [
+				'padding'       => '10|16',
+				'bg-color'      => $accent_color,
+				'border-radius' => '3',
+			],
+			'output'      => '[type=button],button,.btn,.btn2{%s}',
+			'priority'    => '10',
+		],
+		'button-text'       => [
+			'label'       => 'Button',
+			'type'        => 'typography',
+			'description' => 'Set button text color',
+			'user'        => 'creative',
+			'section'     => 'Buttons',
+			'output'      => '[type=button],button,.btn,.btn2,.btn:hover,.btn2:hover{%s}',
+			'default'     => "||||$text_size|$text_font|#ffffff|0|1",
+			'priority'    => '10',
+		],
+		'button-hover-color' => [
+			'label'       => 'Button hover color',
+			'type'        => 'color',
+			'description' => 'Set button hover color',
+			'user'        => 'creative',
+			'section'     => 'Buttons',
+			'output'      => '[type=button]:hover,button:hover,.btn:hover{background-color:%s;}',
+			'default'     => $accent_color_hover,
+			'priority'    => '15',
+		],
+
+		'button2-bg-color' => [
+			'label'       => 'Secondary button color',
+			'type'        => 'color',
+			'description' => 'Set button background color',
+			'user'        => 'creative',
+			'section'     => 'Buttons',
+			'output'      => '.btn2{background-color:%s;}',
+			'default'     => $accent_color_hover,
+			'priority'    => '15',
+		],
+		'button2-hover-color' => [
+			'label'       => 'Secondary button hover color',
+			'type'        => 'color',
+			'description' => 'Set button hover color',
+			'user'        => 'creative',
+			'section'     => 'Buttons',
+			'output'      => '.btn2:hover{background-color:%s;}',
+			'default'     => $accent_color_hover,
+			'priority'    => '15',
+		],
+		'button2-text-color' => [
+			'label'       => 'Secondary button text color',
+			'type'        => 'color',
+			'description' => 'Set button text color',
+			'user'        => 'creative',
+			'section'     => 'Buttons',
+			'output'      => '.btn2{color:%s;}',
 			'default'     => $accent_color_hover,
 			'priority'    => '15',
 		],
@@ -289,7 +354,7 @@ $fields = [
 			'user'     => 'business',
 			'output'   => '.main-navigation li ul{%s}',
 			'priority' => '5',
-			'defaults' => [
+			'default' => [
 				'padding'       => '5|5',
 				'bg-color'      => '#fff',
 				'border-radius' => '0',
@@ -381,7 +446,7 @@ $fields = [
 			'user'     => 'business',
 			'output'   => '.mobile-navigation{%s}',
 			'priority' => '5',
-			'defaults' => [
+			'default' => [
 				'padding'       => '5|7',
 				'bg-color'      => '#fff',
 				'border-radius' => '0',
@@ -396,7 +461,7 @@ $fields = [
 			'user'     => 'business',
 			'output'   => '.site-navigation .caxton-hamburger{color:%s}',
 			'priority' => '5',
-			'defaults' => $accent_color,
+			'default' => $accent_color,
 		],
 
 		// region Menu items
@@ -459,7 +524,7 @@ $fields = [
 			'user'     => 'business',
 			'output'   => '.mobile-navigation li ul{%s}',
 			'priority' => '5',
-			'defaults' => [
+			'default' => [
 				'padding'       => '5|10',
 				'bg-color'      => '#fff',
 				'border-radius' => '0',
@@ -528,7 +593,7 @@ $fields = [
 			'user'     => 'business',
 			'output'   => '.site-footer{%s}',
 			'priority' => '5',
-			'default'  => $footer_color,
+			'default'  => [ 'bg-color' => $footer_color ],
 		],
 		'footer-text'     => [
 			'label'       => 'Custom Text',
@@ -551,11 +616,11 @@ foreach ( $panels as $panel => &$fields ) {
 	foreach ( $fields as $id => $f ) {
 		if ( 'box' == $f['type'] ) {
 
-			$defaults = empty( $f['defaults'] ) ? [] : $f['defaults'];
+			$default = empty( $f['default'] ) ? [] : $f['default'];
 
-			unset( $f['defaults'] );
+			unset( $f['default'] );
 
-			$defaults = wp_parse_args( $defaults, [
+			$default = wp_parse_args( $default, [
 				'padding'       => '',
 				'bg-color'      => '',
 				'border-radius' => '',
@@ -575,7 +640,7 @@ foreach ( $panels as $panel => &$fields ) {
 
 			//Padding
 			$id                = sprintf( $id_format, 'padding' );
-			$f['default']      = $defaults['padding'];
+			$f['default']      = $default['padding'];
 			$f['type']         = 'spacing';
 			$f['label']        = $label . ' Padding';
 			$f['output']       = sprintf( $base_output, 'padding:%s' );
@@ -583,7 +648,7 @@ foreach ( $panels as $panel => &$fields ) {
 
 			//BG Color
 			$id                = sprintf( $id_format, 'bg-color' );
-			$f['default']      = $defaults['bg-color'];
+			$f['default']      = $default['bg-color'];
 			$f['type']         = 'alpha-color';
 			$f['label']        = $label . ' Background Color';
 			$f['output']       = sprintf( $base_output, 'background-color:%s' );
@@ -591,7 +656,7 @@ foreach ( $panels as $panel => &$fields ) {
 
 			//Border
 			$id                = sprintf( $id_format, 'border' );
-			$f['default']      = $defaults['border'];
+			$f['default']      = $default['border'];
 			$f['type']         = 'all-border';
 			$f['label']        = $label . ' Border';
 			$f['output']       = sprintf( $base_output, '%s' );
@@ -599,7 +664,7 @@ foreach ( $panels as $panel => &$fields ) {
 
 			//Rounded corners
 			$id                = sprintf( $id_format, 'border-radius' );
-			$f['default']      = $defaults['border-radius'];
+			$f['default']      = $default['border-radius'];
 			$f['type']         = 'slider';
 			$f['label']        = $label . ' Rounded Corners';
 			$f['output']       = sprintf( $base_output, 'border-radius:%spx' );
@@ -607,7 +672,7 @@ foreach ( $panels as $panel => &$fields ) {
 
 			//Shadow
 			$id                = sprintf( $id_format, 'shadow' );
-			$f['default']      = $defaults['shadow'];
+			$f['default']      = $default['shadow'];
 			$f['type']         = 'shadow';
 			$f['label']        = $label . ' Shadow';
 			$f['output']       = $base_output;
