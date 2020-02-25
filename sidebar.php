@@ -11,5 +11,5 @@
 <?php
 
 if ( is_active_sidebar( 'sidebar-1' ) ) {
-	cxth_get_tpl( 'sidebar', '<aside id="secondary" class="widget-area w-100 w-30-l">', '</aside><!-- #secondary -->' );
+	cxth_get_tpl( 'sidebar', '<aside id="secondary" class="flex-shrink-0 w-100 w-30-l widget-area">', '</aside><!-- #secondary -->' );
 }

@@ -71,7 +71,7 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
-function cxth_get_tpl( $name, $before, $after ) {
+function cxth_get_tpl( $name, $before, $after, $return_only = false ) {
 	$prefix = apply_filters( 'cxth_content_post_name_prefix', 'cxth' );
 
 	$content_post = get_posts( [
@@ -79,7 +79,7 @@ function cxth_get_tpl( $name, $before, $after ) {
 		'post_type' => 'any',
 	] );
 
-	echo $before;
+	ob_start();
 
 	if ( $content_post ) {
 		$content_post = $content_post[0];
@@ -88,5 +88,14 @@ function cxth_get_tpl( $name, $before, $after ) {
 		get_template_part( "template-parts/$name" );
 	}
 
-	echo $after;
+	$content = ob_get_clean();
+
+	if ( $content ) {
+		if ( ! $return_only ) {
+			echo "$before $content $after";
+		}
+		return "$before $content $after";
+	}
+
+	return '';
 }
