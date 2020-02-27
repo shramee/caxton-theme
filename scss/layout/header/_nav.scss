@@ -45,15 +45,36 @@
 	border-top: .2em solid;
 	width: 1em;
 	height: 1em;
+	position: relative;
 	box-sizing: border-box;
 
 	&:before,
 	&:after {
+		transition: all .3s;
 		content: '';
-		border: inherit;
+		position: absolute;
+		border-top: .2em solid;
+		width: 100%;
+		border-top: .2em solid;
 	}
 
 	&:before {
-		margin: auto 0;
+		bottom: .4em;
+	}
+
+	&:after {
+		bottom: 0;
+	}
+	.toggle & {
+		border-width: 0;
+
+		&:before {
+			bottom: .4em;
+			transform: rotate(45deg);
+		}
+		&:after {
+			bottom: .4em;
+			transform: rotate(-45deg);
+		}
 	}
 }
